@@ -10,9 +10,13 @@ import ShoppingCart from './components/ShoppingCart';
 function App() {
 	const [products] = useState(data);
 	const [cart, setCart] = useState([]);
+	console.log(products);
 
-	const addItem = item => {
+
+	const addItem = (item ) => {
+		console.log(item);
 		// add the given item to the cart
+		return setCart([...cart, item]);
 	};
 
 	return (

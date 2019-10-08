@@ -11,22 +11,27 @@ import ShoppingCart from './components/ShoppingCart';
 import {ProductsContext} from "./contexts/ProductsContext";
 import {CartContext} from "./contexts/CartContext";
 
+
 function App() {
 	const [products] = useState(data);
 	const [cart, setCart] = useState([]);
 	console.log(products);
 
 
-	const addItem = (item ) => {
+	const addItem = (item) => {
 		console.log(item);
 		// add the given item to the cart
 		return setCart([...cart, item]);
 	};
 
+	const removeItem = (itemID) => {
+		setCart(cart.filter(item => item.id !== itemID));
+	};
+
 	return (
 		<div className="App">
 			<ProductsContext.Provider value={{products, addItem}}>
-				<CartContext.Provider value={cart}>
+				<CartContext.Provider value={{cart, removeItem}}>
 					<Navigation cart={cart} />
 
 					{/* Routes */}
@@ -47,3 +52,13 @@ function App() {
 }
 
 export default App;
+
+//version 2 --> reducer is not viable currently
+// function reducer(state, action) {
+// 	switch(action.type){
+// 		case 'UPDATE_CART':
+// 			return{...cart, item: action.payload}
+// 		default:
+// 			throw Error('reducer error');
+// 	}
+// }
